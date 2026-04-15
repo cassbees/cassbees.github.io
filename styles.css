@@ -80,7 +80,7 @@ body {
 
 /* Header */
 .site-header {
-  padding: var(--space-xl) 0 var(--space-lg);
+  padding: var(--space-lg) 0 var(--space-lg);
   background: linear-gradient(
     165deg,
     var(--color-honey-soft) 0%,
@@ -88,6 +88,21 @@ body {
     var(--color-bg) 100%
   );
   border-bottom: 1px solid var(--color-border);
+}
+
+.hero-photo {
+  margin: 0 0 var(--space-lg);
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  vertical-align: middle;
 }
 
 .site-header h1 {
@@ -321,6 +336,33 @@ main {
   outline-offset: 3px;
 }
 
+/* Video */
+.section-video .video-intro {
+  margin: 0 0 var(--space-md);
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+.section-video h2 {
+  text-align: center;
+}
+
+.section-video .video-frame {
+  margin: 0 auto;
+  max-width: 42rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  background: #000;
+}
+
+.section-video video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* Footer */
 .site-footer {
   padding: var(--space-lg) 0 var(--space-xl);
@@ -376,5 +418,52 @@ main {
     animation: none !important;
     opacity: 0;
     will-change: auto;
+  }
+
+  .bee-hive-fx {
+    display: none !important;
+  }
+}
+
+/* Hive button click: bee emerges, orbits 5×, returns (driven by contact-bee.js) */
+.bee-hive-fx {
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  top: 0;
+  width: clamp(2rem, 11vw, 4.5rem);
+  height: auto;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+  transform-origin: center center;
+  --orbit-r: 48px;
+  will-change: transform, opacity;
+}
+
+.bee-hive-fx.is-active {
+  visibility: visible;
+  opacity: 1;
+  animation: bee-hive-orbit 2.4s ease-in-out forwards;
+}
+
+@keyframes bee-hive-orbit {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(0) scale(0);
+  }
+  10% {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(0) scale(1);
+  }
+  12% {
+    transform: translate(-50%, -50%) rotate(0deg) translateY(calc(-1 * var(--orbit-r))) scale(1);
+  }
+  88% {
+    transform: translate(-50%, -50%) rotate(1800deg) translateY(calc(-1 * var(--orbit-r))) scale(1);
+  }
+  92% {
+    transform: translate(-50%, -50%) rotate(1800deg) translateY(0) scale(1);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(1800deg) translateY(0) scale(0);
   }
 }

@@ -18,9 +18,20 @@
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
   <img class="bee-flight" src="bee.svg" alt="" aria-hidden="true" decoding="async" width="80" height="80">
+  <img class="bee-hive-fx" src="bee.svg" alt="" aria-hidden="true" decoding="async" width="80" height="80">
 
   <header class="site-header">
     <div class="wrap">
+      <figure class="hero-photo">
+        <img
+          src="IMG_6167.png"
+          alt="Cassie in a beekeeping suit at sunset, waving beside a hive with a smoker."
+          width="1536"
+          height="912"
+          decoding="async"
+          fetchpriority="high"
+        >
+      </figure>
       <h1>Cassie &amp; the Bees</h1>
       <p class="tagline">I’m Cassie. I’m a newer beekeeper who loves bees and likes helping people give swarms a good home—when we can do it safely.</p>
       <p class="region">From Austin to San Antonio</p>
@@ -72,6 +83,24 @@
         <p><a class="button" href="mailto:cassie@cassbees.com?subject=Bee%20collection%20request">Email Cassie</a></p>
         <p class="contact-subline">Rather write? <a class="contact-inline" href="mailto:cassie@cassbees.com?subject=Bee%20collection%20request">cassie@cassbees.com</a> goes<br>straight to me, and I read every message.</p>
       </section>
+
+      <section class="section section-video" aria-labelledby="video-heading">
+        <h2 id="video-heading">See me in action</h2>
+        <p class="video-intro">A quick look at bee work in the field.</p>
+        <div class="video-frame">
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            width="1280"
+            height="720"
+            aria-describedby="video-heading"
+          >
+            <source src="IMG_9271.mp4" type="video/mp4">
+            <p>Your browser can’t play this video. <a href="IMG_9271.mp4">Download the MP4</a> instead.</p>
+          </video>
+        </div>
+      </section>
     </div>
   </main>
 
@@ -80,6 +109,7 @@
       <p>&copy; <span id="copyright-year">2026</span> Cassie</p>
     </div>
   </footer>
+  <script src="contact-bee.js" defer></script>
   <script>
   (function () {
     var el = document.getElementById('copyright-year');
