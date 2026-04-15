@@ -22,6 +22,17 @@
   --space-md: 1.25rem;
   --space-lg: 2rem;
   --space-xl: 3rem;
+  /* Skep-style contact buttons */
+  --hive-band-a: #f2e4c4;
+  --hive-band-b: #dcc48a;
+  --hive-band-shadow: #b8941a;
+  --hive-shade-top: rgba(255, 255, 255, 0.38);
+  --hive-shade-bottom: rgba(60, 40, 12, 0.12);
+  --hive-border: #4a3410;
+  --hive-entrance: #2a1c0a;
+  --hive-dome-r: 1.65rem;
+  --hive-foot-r: 0.45rem;
+  --hive-band-size: 9px;
 }
 
 *,
@@ -210,6 +221,7 @@ main {
 /* Contact */
 .section-contact {
   padding: var(--space-lg);
+  text-align: center;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -220,32 +232,92 @@ main {
   margin-bottom: var(--space-sm);
 }
 
-.contact-subline {
-  margin: var(--space-sm) 0 0;
+/* Specificity beats `.section p` so max-width blocks stay centered (margin auto). */
+.section-contact p.contact-subline {
+  margin: var(--space-sm) auto var(--space-md);
+  max-width: 28rem;
   font-size: 0.9375rem;
+  line-height: 1.55;
+  text-align: center;
   color: var(--color-text-muted);
 }
 
+.section-contact p.contact-subline:last-child {
+  margin-bottom: 0;
+}
+
+.contact-subline .contact-inline {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.contact-subline .contact-inline:hover {
+  color: var(--color-accent-dark);
+}
+
+.contact-subline .contact-inline:focus-visible {
+  outline: 3px solid var(--color-honey);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 .button {
+  position: relative;
   display: inline-block;
   margin-top: var(--space-sm);
-  padding: 0.75rem 1.35rem;
+  padding: 0.85rem 1.4rem 1rem;
+  min-height: 2.75rem;
   font-weight: 700;
   font-size: 1rem;
+  line-height: 1.25;
   text-decoration: none;
-  color: #fff;
-  background: linear-gradient(180deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
-  border-radius: 999px;
-  border: 2px solid var(--color-accent-dark);
-  box-shadow: 0 2px 0 var(--color-accent-dark);
+  cursor: pointer;
+  color: var(--color-text);
+  border: 2px solid var(--hive-border);
+  border-radius: var(--hive-dome-r) var(--hive-dome-r) var(--hive-foot-r) var(--hive-foot-r);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.35) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.06) inset,
+    0 3px 6px rgba(31, 26, 18, 0.18);
+  background-color: var(--hive-band-b);
+  background-image:
+    linear-gradient(
+      180deg,
+      var(--hive-shade-top) 0%,
+      transparent 38%,
+      transparent 62%,
+      var(--hive-shade-bottom) 100%
+    ),
+    repeating-linear-gradient(
+      180deg,
+      var(--hive-band-a) 0 calc(var(--hive-band-size) - 2px),
+      var(--hive-band-shadow) calc(var(--hive-band-size) - 2px) var(--hive-band-size)
+    );
+}
+
+.button::after {
+  content: "";
+  position: absolute;
+  bottom: 0.35rem;
+  left: 50%;
+  width: 0.55rem;
+  height: 0.38rem;
+  transform: translateX(-50%);
+  background: var(--hive-entrance);
+  border-radius: 50% 50% 45% 45%;
+  opacity: 0.9;
+  pointer-events: none;
 }
 
 .button:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.04) saturate(1.05);
 }
 
 .button:focus-visible {
-  outline: 3px solid var(--color-honey);
+  outline: 3px solid var(--color-accent-dark);
   outline-offset: 3px;
 }
 
