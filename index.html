@@ -33,7 +33,7 @@
         >
       </figure>
       <h1>Cassie &amp; the Bees</h1>
-      <p class="tagline">I’m Cassie. I’m a newer beekeeper who loves bees and likes helping people give swarms a good home—when we can do it safely.</p>
+      <p class="tagline">I’m Cassie. I’m a hobbyist beekeeper who loves bees and likes helping people give swarms a good home—when we can do it safely.</p>
       <p class="region">From Austin to San Antonio</p>
     </div>
   </header>
@@ -87,18 +87,28 @@
       <section class="section section-video" aria-labelledby="video-heading">
         <h2 id="video-heading">See me in action</h2>
         <p class="video-intro">A quick look at bee work in the field.</p>
+        <p class="video-hint"><strong>Tap the big play button</strong> in the middle of the video—sound plays once it starts.</p>
         <div class="video-frame">
           <video
+            id="site-video"
             controls
             playsinline
             preload="metadata"
+            poster="IMG_6167.png"
             width="1280"
             height="720"
             aria-describedby="video-heading"
           >
-            <source src="IMG_9271.mp4" type="video/mp4">
-            <p>Your browser can’t play this video. <a href="IMG_9271.mp4">Download the MP4</a> instead.</p>
+            <source src="bees.mp4" type="video/mp4">
+            <p>Your browser can’t play this video. <a href="bees.mp4">Download the MP4</a> instead.</p>
           </video>
+          <button type="button" class="video-play-overlay" aria-label="Play video">
+            <span class="video-play-circle" aria-hidden="true">
+              <svg class="video-play-triangle" viewBox="0 0 24 24" width="48" height="48" focusable="false" aria-hidden="true">
+                <path fill="currentColor" d="M8 5v14l11-7L8 5z"/>
+              </svg>
+            </span>
+          </button>
         </div>
       </section>
     </div>
@@ -110,6 +120,26 @@
     </div>
   </footer>
   <script src="contact-bee.js" defer></script>
+  <script>
+  (function () {
+    var frame = document.querySelector('.section-video .video-frame');
+    var video = document.getElementById('site-video');
+    var btn = document.querySelector('.video-play-overlay');
+    if (!frame || !video || !btn) return;
+
+    btn.addEventListener('click', function () {
+      video.play().catch(function () {});
+    });
+
+    video.addEventListener('play', function () {
+      frame.classList.add('is-playing');
+    });
+
+    video.addEventListener('ended', function () {
+      frame.classList.remove('is-playing');
+    });
+  })();
+  </script>
   <script>
   (function () {
     var el = document.getElementById('copyright-year');
