@@ -79,15 +79,6 @@ body {
   border-bottom: 1px solid var(--color-border);
 }
 
-.eyebrow {
-  margin: 0 0 var(--space-xs);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-accent-dark);
-}
-
 .site-header h1 {
   margin: 0 0 var(--space-sm);
   font-size: clamp(1.85rem, 5vw, 2.35rem);
@@ -229,6 +220,12 @@ main {
   margin-bottom: var(--space-sm);
 }
 
+.contact-subline {
+  margin: var(--space-sm) 0 0;
+  font-size: 0.9375rem;
+  color: var(--color-text-muted);
+}
+
 .button {
   display: inline-block;
   margin-top: var(--space-sm);
@@ -264,4 +261,48 @@ main {
   font-size: 0.875rem;
   color: var(--color-text-muted);
   text-align: center;
+}
+
+/* Decorative flying bee (viewport loop) */
+.bee-flight {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 10;
+  width: clamp(2.5rem, 10vw, 5rem);
+  height: auto;
+  pointer-events: none;
+  transform-origin: center center;
+  opacity: 0.92;
+  will-change: transform;
+  animation: bee-orbit 22s linear infinite;
+}
+
+@keyframes bee-orbit {
+  0% {
+    transform: translate(4vw, 12vh) rotate(12deg);
+  }
+  20% {
+    transform: translate(calc(100vw - 100% - 6vw), 8vh) rotate(-18deg);
+  }
+  40% {
+    transform: translate(calc(100vw - 100% - 4vw),42vh) rotate(8deg);
+  }
+  60% {
+    transform: translate(10vw, calc(100vh - 100% - 18vh)) rotate(-22deg);
+  }
+  80% {
+    transform: translate(6vw, 55vh) rotate(15deg);
+  }
+  100% {
+    transform: translate(4vw, 12vh) rotate(12deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bee-flight {
+    animation: none !important;
+    opacity: 0;
+    will-change: auto;
+  }
 }
