@@ -33,9 +33,47 @@
     }
   }
 
-  function go(href) {
-    cleanup();
-    window.location.href = href;
+  /**
+   * Runs the same hive-button bee orbit used in the contact section.
+   * @param {Element} el — element whose bounds center the orbit (e.g. a.button or summary.button)
+   * @param {function(): void} [onDone] — runs after animation and cleanup (e.g. navigate)
+   * @returns {boolean} true if the animation started, false if another run was already in progress
+   */
+  function runBeeOrbit(el, onDone) {
+    if (busy || !el) return false;
+
+    var rect = el.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var r = safeOrbitRadius(cx, cy, rect);
+
+    busy = true;
+    bee.style.left = cx + 'px';
+    bee.style.top = cy + 'px';
+    bee.style.setProperty('--orbit-r', r + 'px');
+
+    function finish() {
+      cleanup();
+      if (typeof onDone === 'function') onDone();
+    }
+
+    function onEnd(ev) {
+      if (ev.animationName !== ANIM_NAME) return;
+      bee.removeEventListener('animationend', onEnd);
+      finish();
+    }
+
+    bee.addEventListener('animationend', onEnd);
+    fallbackTimer = setTimeout(function () {
+      bee.removeEventListener('animationend', onEnd);
+      finish();
+    }, ANIM_MS + 150);
+
+    requestAnimationFrame(function () {
+      bee.classList.add('is-active');
+    });
+
+    return true;
   }
 
   var links = document.querySelectorAll('.section-contact a.button');
@@ -51,33 +89,18 @@
         return;
       }
 
-      var rect = this.getBoundingClientRect();
-      var cx = rect.left + rect.width / 2;
-      var cy = rect.top + rect.height / 2;
-      var r = safeOrbitRadius(cx, cy, rect);
-
       e.preventDefault();
-      busy = true;
-
-      bee.style.left = cx + 'px';
-      bee.style.top = cy + 'px';
-      bee.style.setProperty('--orbit-r', r + 'px');
-
-      function onEnd(ev) {
-        if (ev.animationName !== ANIM_NAME) return;
-        bee.removeEventListener('animationend', onEnd);
-        go(href);
-      }
-
-      bee.addEventListener('animationend', onEnd);
-      fallbackTimer = setTimeout(function () {
-        bee.removeEventListener('animationend', onEnd);
-        go(href);
-      }, ANIM_MS + 150);
-
-      requestAnimationFrame(function () {
-        bee.classList.add('is-active');
+      runBeeOrbit(this, function () {
+        window.location.href = href;
       });
+    });
+  }
+
+  var bannerSummary = document.querySelector('.value-banner-details summary.button');
+  if (bannerSummary) {
+    bannerSummary.addEventListener('click', function (e) {
+      if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+      runBeeOrbit(bannerSummary);
     });
   }
 })();

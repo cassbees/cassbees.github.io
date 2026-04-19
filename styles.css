@@ -33,6 +33,12 @@
   --hive-dome-r: 1.65rem;
   --hive-foot-r: 0.45rem;
   --hive-band-size: 9px;
+  /* Readable label on hive band texture (Show more + Get in touch) */
+  --hive-button-text-shadow:
+    0 0 3px #fff,
+    0 0 8px rgba(255, 255, 255, 0.95),
+    0 0 16px rgba(255, 255, 255, 0.75),
+    0 0 1px #fffef8;
 }
 
 *,
@@ -196,6 +202,73 @@ main {
   font-size: 0.9375rem;
 }
 
+/* Value proposition: Texas land / ag use (above My story) */
+.section-value-banner {
+  padding: var(--space-lg);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.section-value-banner--fullbleed {
+  width: 100%;
+  margin-inline: 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
+  box-sizing: border-box;
+}
+
+.section-value-banner h2 {
+  margin: 0 0 var(--space-md);
+}
+
+.section-value-banner .wrap > p:not(.value-banner-note),
+.section-value-banner .value-banner-details-body > p:not(.value-banner-note) {
+  max-width: 40rem;
+  margin-inline: auto;
+  text-wrap: balance;
+  line-height: 1.6;
+}
+
+.section-value-banner .value-banner-note {
+  max-width: 36rem;
+  margin: var(--space-sm) auto 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-text-muted);
+}
+
+.section-value-banner .value-banner-details {
+  margin-top: var(--space-md);
+  text-align: center;
+}
+
+/* summary uses shared .button; suppress default marker; avoid extra top margin */
+.section-value-banner .value-banner-details summary.button {
+  list-style: none;
+  margin-top: 0;
+  max-width: min(100%, 36rem);
+  text-wrap: balance;
+  text-shadow: var(--hive-button-text-shadow);
+}
+
+.section-value-banner .value-banner-details summary.button::-webkit-details-marker {
+  display: none;
+}
+
+.section-value-banner .value-banner-details summary.button::marker {
+  content: "";
+}
+
+.section-value-banner .value-banner-details-body {
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
 .pricing-intro {
   font-size: 1.0625rem;
   color: var(--color-text-muted);
@@ -253,6 +326,10 @@ main {
 
 .section-contact h2 {
   margin-bottom: var(--space-sm);
+}
+
+.section-contact a.button {
+  text-shadow: var(--hive-button-text-shadow);
 }
 
 /* Specificity beats `.section p` so max-width blocks stay centered (margin auto). */
@@ -346,24 +423,9 @@ main {
 
 /* Video */
 .section-video .video-intro {
-  margin: 0 0 var(--space-sm);
-  text-align: center;
-  color: var(--color-text-muted);
-}
-
-.section-video .video-hint {
   margin: 0 0 var(--space-md);
-  max-width: 36rem;
-  margin-inline: auto;
-  padding: 0 var(--space-sm);
   text-align: center;
-  font-size: 0.9375rem;
-  line-height: 1.5;
   color: var(--color-text-muted);
-}
-
-.section-video .video-hint strong {
-  color: var(--color-text);
 }
 
 .section-video h2 {
